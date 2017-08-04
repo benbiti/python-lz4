@@ -406,11 +406,14 @@ decompress (PyObject * Py_UNUSED (self), PyObject * args, PyObject * kwargs)
     }
   else if ((size_t)output_size != dest_size)
     {
+      /* remove size check to support unknown uncompressed size */
       /* Better to fail explicitly than to allow fishy data to pass through. */
+      /*
       PyErr_Format (PyExc_ValueError,
                     "Decompressor wrote %d bytes, but %zu bytes expected from header",
                     output_size, dest_size);
       Py_CLEAR (py_dest);
+      */
     }
 
   return py_dest;
